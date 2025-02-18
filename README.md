@@ -1,2 +1,2 @@
 # PlacePal
-The ultimate placemnt website designed by students for students
+The ultimate placement website. Designed by students for students
