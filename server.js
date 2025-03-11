@@ -16,21 +16,77 @@ const app = require("express")(),
         resave: true,
         saveUninitialized: true
     }),
-    bodyparser = require("body-parser"),
     crypto = require("crypto"),
-    check = require("express-validator"),
-    sanitizer = require("sanitize"),
+    bodyparser = require("body-parser"),
     MongoClient = require('mongodb-legacy').MongoClient,
-    client = new MongoClient(DB_CONN_STRING);
+    client = new MongoClient(DB_CONN_STRING),
+    sanitize = require('validator').sanitize;
 
+const { body, validationResult } = require("express-validator");
 
 app.use(session);
 app.set("view engine", "ejs");
 app.use(require("express").static("public"));
 app.use(require("express").urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
+    return res.render("pages/index");
+});
 
+app.post("/register",
+    [
+        [
+            body("email").isEmail().trim().xss(),
+            body("password").notEmpty().trim().xss()
+        ]
+    ], async (req, res) => {
+        if (!db) { res.redirect("/"); req.session.loggedIn = false; return; }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const hash = hashPassword(req.body.password);
+
+        var user_to_add = {
+            email: req.body.email,
+            pass: hash
+        }
+        return res.render("pages/loginpage", { err_msg: error });
+    })
+
+/**
+ * Login route
+ */
+app.post("/login",
+    [
+        [
+            body("email").isEmail().trim().xss(),
+            body("password").notEmpty().trim().xss()
+        ]
+    ], async (req, res) => {
+        if (!db) { res.redirect("/"); req.session.loggedIn = false; return; }
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        db.collection("users").findOne({ "email": req.body.email }, (err, result) => {
+            if (err) throw err;
+            if (!result) {
+                error = "Invalid email or password.";
+                return res.render("pages/loginpage", { err_msg: error });
+            }
+            if (compareHashPassword(req.body.password, result.password)) {
+                req.session.loggedin = true;
+                req.session.uname = result.user;
+                if (err) throw err;
+                res.redirect("/");
+                return;
+            }
+        })
 });
 
 /* 
@@ -42,12 +98,27 @@ const connectDB = async () => {
         // Use connect method to connect to the server
         await client.connect();
         console.log('Connected successfully to MongoDB Atlas');
-
         db = client.db(DB_NAME);
     }
     catch (err) {
         console.log(err);
     }
+}
+
+const hashPassword = password => {
+    return crypto.createHash('sha256').update(password).digest('hex')
+}
+
+const compareHashPassword = (password, hashedPassword) => {
+    if (hashPassword(password) === hashedPassword) {
+        return false;
+    }
+    return false;
+}
+
+const isAuthenticated = ({ loggedin = false }) => {
+    if (!loggedin || !db) { return false; }
+    return true;
 }
 
 connectDB();
