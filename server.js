@@ -10,6 +10,7 @@ const DB_CONN_STRING = process.env.DB_CONN_STRING;
 const DB_NAME = process.env.DB_NAME;
 
 const app = require("express")(),
+    express = require("express"),
     http = require("http").Server(app),
     session = require("express-session")({
         secret: "secrets",
@@ -34,11 +35,16 @@ app.get("/", (req, res) => {
     return res.render("pages/index");
 });
 
+app.get("/login", (req, res) => {
+    return res.render("pages/loginpage");
+});
+
 app.post("/register",
     [
         [
-            body("email").isEmail().trim().xss(),
-            body("password").notEmpty().trim().xss()
+            body("email").isEmail().trim(),
+            body("password").notEmpty().trim(),
+            body("role").notEmpty().trim()
         ]
     ], async (req, res) => {
         if (!db) { res.redirect("/"); req.session.loggedIn = false; return; }
@@ -48,13 +54,17 @@ app.post("/register",
         }
 
         const hash = hashPassword(req.body.password);
-
         var user_to_add = {
             email: req.body.email,
-            pass: hash
+            pass_hash: hash,
+            role: req.body.role
         }
-        return res.render("pages/loginpage", { err_msg: error });
-    })
+
+    db.collection("users").insertOne(user_to_add, (err, result) => {
+        if (err) throw err;
+        return res.render("pages/loginpage");
+    });
+});
 
 /**
  * Login route
@@ -62,8 +72,8 @@ app.post("/register",
 app.post("/login",
     [
         [
-            body("email").isEmail().trim().xss(),
-            body("password").notEmpty().trim().xss()
+            body("email").isEmail(),
+            body("password").notEmpty()
         ]
     ], async (req, res) => {
         if (!db) { res.redirect("/"); req.session.loggedIn = false; return; }
@@ -77,7 +87,7 @@ app.post("/login",
             if (err) throw err;
             if (!result) {
                 error = "Invalid email or password.";
-                return res.render("pages/loginpage", { err_msg: error });
+                return res.render("pages/loginpage");
             }
             if (compareHashPassword(req.body.password, result.password)) {
                 req.session.loggedin = true;
