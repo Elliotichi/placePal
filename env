@@ -1,0 +1,6 @@
+PORT=8080
+API_KEY=
+DB_USER=
+DB_PASS=
+DB_NAME="devdatabase"
+DB_CONN_STRING="mongodb+srv://srennie6:qmJNRlmoPkTw4XLk@devdatabase.uakrpec.mongodb.net/?retryWrites=true&w=majority&appName=DevDatabase"
