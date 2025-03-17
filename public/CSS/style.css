@@ -103,10 +103,16 @@ p {
     text-decoration: none;
     width:100%;
     text-align: left;
-    cursor: pointer;
-    outline: none;
     display: block;
     color: var(--text);
+    box-sizing: border-box;
+    transition: border 0.3s ease; /* Smooth transition for the border */
+}
+
+.dropdownContainer a:hover{
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: var(--text);
 }
 /*** Nav bar ***/
 
