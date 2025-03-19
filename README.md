@@ -50,7 +50,6 @@ PlacePal MoSCoW Requirement
 
 # Installation and Setup
 1. Clone or download the repository: https://github.com/Elliotichi/placePal
-2. Install the NodeJS packages (`npm install`)
-3. While inside the repository folder, create a Python virtual environment (`python -m venv venv`)
-4. Activate venv & install requirements (`.\venv\Scripts\activate && pip install -r requirements.txt`)
+2. Install the NodeJS packages (`npm run setup`)
+3. Install the Python requirements (`npm run microservice`)
 5. Run the server (`npm start`)

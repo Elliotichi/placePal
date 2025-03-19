@@ -4,7 +4,7 @@
   "description": "A placement website for STEM students.",
   "main": "server.js",
   "scripts": {
-    "setup": "npm install cross-env npm-run-all --save-dev && python -m venv venv",
+    "setup": "npm install cross-env npm-run-all --save-dev && npm install && python -m venv venv",
     "microservice": "cross-env-shell \"venv/Scripts/activate && pip install -r requirements.txt\"",
     "start": "npm-run-all --parallel start:node start:cv_analyzer",
     "start:cv_analyzer": "cross-env-shell \"venv/Scripts/activate python cv.py\"",
