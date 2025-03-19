@@ -1,3 +1,7 @@
+# Project-specific folders
+venv
+uploads
+
 # Logs
 logs
 *.log

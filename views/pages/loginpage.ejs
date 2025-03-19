@@ -8,27 +8,32 @@
         <%= failure %>
 
 
-    <form action="/login" method="POST">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-        <button type="submit">Login</button>
-    </form>
+            <form action="/login" method="POST">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <button type="submit">Login</button>
+            </form>
 
-    <form action="/register" method="POST">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-        <label for="role">Role</label>
-        <select id="role" name="role">
-            <option>Student</option>
-            <option>Placement Provider</option>
+            <form action="/register" method="POST">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                    <option>Student</option>
+                    <option>Placement Provider</option>
 
-        </select>
-        <button type="submit">Register</button>
-    </form>
+                </select>
+                <button type="submit">Register</button>
+                </form>
+            <form action="/analyze" method="POST" enctype="multipart/form-data">
+                <label for="cv">Upload CV</label>
+                <input type="file" name="document" accept=".docx">
+                <input type="submit">
+            </form>
 </body>
 
 </html>
