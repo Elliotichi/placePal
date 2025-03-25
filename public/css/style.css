@@ -1,121 +1,154 @@
 /*** All ***/
 :root {
-    --Background: #2D2D30;
-    --components: #1E1E1E;
-    --text: #D3D3D3;
-    
+  --Background: #2d2d30;
+  --components: #1e1e1e;
+  --text: #d3d3d3;
+  --hover: rgba(255, 255, 255, 0.1);
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--Background);
-    font-family: 'League Spartan', sans-serif;
-    font-size: 20px;
-    color: var(--text);
+  margin: 0;
+  padding: 0;
+  background-color: var(--Background);
+  font-family: "League Spartan", sans-serif;
+  font-size: 20px;
+  color: var(--text);
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
+
 /*** All ***/
 
+/*** High-level layout ***/
+.header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  position: relative;
+}
+
+/*** Site logo ***/
+
+#header-logo {
+  width: 40vw;
+}
+
+@media only screen and (min-width: 480px) {
+  #header-logo {
+    width: 20vw;
+  }
+}
 
 /*** Nav bar ***/
-.pageTop {
-    display: flex;
-    flex-direction: column;
-}
 
 .navbar {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--components);
+  align-items: stretch;
+  padding: 12px;
 }
 
-.navbarLeft {
-    float: left;
+.dropdown-btn {
+  background: none;
+  padding: 5px 10px;
+  border: none;
+  font-size: 20px;
+  margin:10px;
 }
 
-.navbarRight {
-    float: right;
+.dropdown-btn:hover {
+  background-color: var(--hover);
 }
 
-.dropdown-btn{
-    background: none;
-    background-color: none;
-    border: none;
-    font-size: 20px;
+.searchBar {
+  float:right;
+  background-color: var(--text);
+  margin-left: 0;
+  font-size: 1.25em;
+  border-radius: 20px;
+  width:30vw;
 }
 
-.search {
-    background-color: var(--components);
-    width: 100%;
-    padding: 12px;
-    display: flex;
-    justify-content: space-between
+.searchBar::placeholder {
+  text-align: left;
 }
 
-.searchLeft {
-    display: flex;
-    justify-content: left;
-    align-items: center;
+.searchBar:focus {
+  transition: flex-grow 0.5s ease-in-out;
+  flex-grow: 2;
 }
 
-.searchCentre{
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-    padding: 0;
-    margin: 0;
+.searchBar:not(:focus) {
+  transition: flex-grow 0.5s ease-in-out;
+  flex-grow: 1;
 }
 
-.searchRight {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}
-
-.searchBar{
-    background-color: var(--text);
-    margin-right: 20px;
-    margin-left: 0;
-    border-radius: 20px;
-    width: 300px;
-}
-
-.logo {
-    height: 60px;
-    width: auto;
-}
-
-.fa-solid{
-    margin-right: 15px;
+.sidebar-icon {
+  margin-right: 15px;
 }
 
 .dropdownContainer {
-    width: 200px;
-    height: fit-content;
-    position: fixed;
-    overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: -50vw;
+  width: 25vw;
+  transition: left 0.75s ease;
 }
-  
+
+.dropdownContainer.active {
+  left: 0;
+}
+
 .dropdownContainer a {
-    padding: 12px 8px 12px 16px;
-    text-decoration: none;
-    width:100%;
-    text-align: left;
-    display: block;
-    color: var(--text);
-    box-sizing: border-box;
-    transition: border 0.3s ease; /* Smooth transition for the border */
+  display: flex;
+  align-items: center;
+  color: var(--text);
+  padding: 12px 8px 12px 16px;
+  text-decoration: none;
+  position: relative;
 }
 
-.dropdownContainer a:hover{
-    border: 2px solid;
-    border-radius: 15px;
-    border-color: var(--text);
+.dropdownContainer a:hover {
+  background-color: var(--hover);
 }
+
+.dropdownContainer a::before,
+.dropdownContainer a::after {
+  content: "";
+  position: absolute;
+  background-color: var(--text);
+  transition: transform 0.1s ease;
+  transform-origin: center;
+}
+
+.dropdownContainer a::before {
+  bottom: -2px;
+  left: -5px;
+  width: 5px;
+  height: 100%;
+  transform: scale(1, 0);
+}
+
+.dropdownContainer a::after {
+  right: -5px;
+  width: 5px;
+  height: 100%;
+  transform: scale(1, 0);
+}
+
+.dropdownContainer a:hover::before {
+  transform: scale(1, 1);
+}
+
+.dropdownContainer a:hover::after {
+  transform: scale(1, 1);
+}
+
 /*** Nav bar ***/
-
-  
-
-  
