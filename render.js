@@ -1,7 +1,11 @@
 exports.renderLogin = function (res, options = { success: "", failure: "" }) {
-    return res.render("pages/loginpage", options);
-}
+  const defaults = { success: "", failure: "" };
+  options = { ...defaults, ...options };
+  return res.render("pages/loginpage", options);
+};
 
 exports.renderHomepage = function (res, options = { success: "", failure: "" }) {
-    return res.render("pages/index", options);
-}
+  const defaults = { success: "", failure: "" };
+  options = { ...defaults, ...options };
+  return res.render("pages/index", options);
+};

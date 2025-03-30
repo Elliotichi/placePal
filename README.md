@@ -6,15 +6,15 @@ PlacePal MoSCoW Requirement
 
 ### Must Have 
 
-- Students can register with a Student account 
+- [X] Students can register with a Student account 
 
-- Companies can register with a Company account 
+- [X] Companies can register with a Company account 
 
-- User can view a list of placements 
+- [X] User can view a list of placements 
 
 - Company can add a placement with associated tags 
 
-- Students can filter placements by using the filers available 
+- [X] Students can filter placements by using the filers available 
 
 - A more focused filter.  
 
@@ -24,9 +24,9 @@ PlacePal MoSCoW Requirement
 
 - Company should select a payment plan for listing 
 
-- Regarding the backend, have input validation to prevent SQL injection 
+- [X] Regarding the backend, have input validation to prevent SQL injection 
 
-- Users can upload a CV and receive recommendations 
+- [X] Users can upload a CV and receive recommendations 
 
 ### Could-Have 
 

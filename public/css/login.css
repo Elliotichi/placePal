@@ -1,0 +1,106 @@
+#login-header {
+  margin: auto;
+  max-width: 40%;
+}
+
+#login-logo {
+  max-width: 100%;
+}
+
+.login-container {
+  /*** The overall container for the login html elements ***/
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: var(--background);
+  border: 1px solid var(--hover);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-step {
+  /*** Overall layout for each "step" ***/
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/*** Overall layout for the form steps ***/
+#student-login-form,
+#agency-login-form,
+#registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+#student-login-form *,
+#agency-login-form *,
+#registration-form * {
+  width: 100%;
+}
+
+/*** Styling for input elements ***/
+.login-form-group input {
+  height: 60px;
+  padding: 0 16px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--hover);
+  background-color: var(--background);
+  appearance: none;
+  color: var(--text);
+}
+
+/*** override browser autofill styles ¯\_(ツ)_/¯ ***/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/*** More override browser autofill (firefox stuff) ¯\_(ツ)_/¯ ***/
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  box-shadow: 0 0 0 30px var(--background) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/*** Specific styling for login form buttons ***/
+.start-btn,
+.role-btn,
+.submit-btn {
+  width: 80%;
+  margin: auto;
+  background-color: var(--placepalblue);
+  padding: 20px;
+  color: var(--text);
+  font-size: 1.25em;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.start-btn:hover,
+.role-btn:hover,
+.submit-btn:hover {
+  /*** Swell buttons a bit on hover, looks good ***/
+  /*** Override the fancier stuff for navbar buttons from styles.css/.site-btn ***/
+  background-color: var(--placepalblue);
+  transform: scale(1.05) !important;
+  border-bottom: none !important;
+}
+
+/*** Back button at bottom left ***/
+.back-link {
+  margin-right: auto !important;
+}

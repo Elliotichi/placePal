@@ -1,5 +1,12 @@
+/**
+ * @file navbar.js
+ * @author saul and the goodmans
+ * @brief Handles the sidebar animations (slide in from the side)
+ * @TODO seems out of place with the updated site. Investigate alternatives?
+ */
+
 $(document).ready(function () {
-  $(".dropdown-btn").click(function () {
+  $("#sidebar-btn").click(function () {
     $(".dropdownContainer").toggleClass("active");
 
     if ($(".dropdownContainer").hasClass("active")) {
@@ -10,10 +17,7 @@ $(document).ready(function () {
           .animate({ opacity: 1, marginLeft: "15px" }, 300);
       });
     } else {
-      $(".dropdownContainer a").animate(
-        { opacity: 0, marginLeft: "-15px" },
-        400
-      );
+      $(".dropdownContainer a").animate({ opacity: 0, marginLeft: "-15px" }, 400);
     }
   });
 });

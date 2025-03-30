@@ -1,33 +1,166 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+    <title>PlacePal Login</title>
+    <link rel="stylesheet" href="../CSS/login.css" />
+    <script src="scripts/login.js"></script>
+  </head>
 
+  <body>
+    <!-- overall login container (will enclose everything)-->
+    <div class="login-container">
+      <!-- Login is step based, will go through role select etc -->
+      <div class="login-step" id="entry-step">
+        <div class="logo-container">
+          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
+        </div>
 
-<body>
-    <%= success %>
-        <%= failure %>
+        <h1>Welcome</h1>
+        <button class="start-btn site-btn" id="start-login">Login / Register</button>
+      </div>
+      <!-- /entry-step -->
+      <!-- Role selection - pick student/agency-->
+      <div class="login-step" id="role-step" style="display: none">
+        <div class="logo-container">
+          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
+        </div>
+        <h2>I am a...</h2>
+        <button class="role-btn site-btn" id="select-student">Student</button>
+        <button class="role-btn site-btn" id="select-agency">Agency</button>
+        <a href="#" class="back-link" id="back-to-entry">← Back</a>
+      </div>
 
+      <!-- Student login. Basically identical to agency login, it's more of a UX "make them feel special" idea -->
+      <div class="login-step" id="student-form-step" style="display: none">
+        <div class="logo-container">
+          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
+        </div>
+        <h2>Student Login</h2>
+        <form id="student-login-form" action="/login" method="POST">
+          <div class="login-form-group">
+            <input
+              required
+              placeholder="Enter your email"
+              name="loginemail"
+              autocomplete="email"
+              value=""
+              type="email"
+              id="student-email"
+            />
+          </div>
+          <div class="login-form-group">
+            <input
+              required
+              placeholder="Enter your password"
+              name="loginpassword"
+              autocomplete="current-password"
+              value=""
+              type="password"
+              id="student-password"
+            />
+          </div>
+          <input type="hidden" name="userType" value="student" />
+          <button type="submit" class="submit-btn site-btn">Login</button>
+        </form>
+        <p class="login-form-footer">
+          <a href="#" id="student-forgot-password">Forgot password?</a>
+          <span class="separator">|</span>
+          <a href="#" id="student-register">Create account</a>
+        </p>
+        <a href="#" class="back-link" id="back-to-role">← Back</a>
+      </div>
 
-            <form action="/login" method="POST">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password">
-                <button type="submit">Login</button>
-            </form>
+      <!-- Agency login -->
+      <div class="login-step" id="agency-form-step" style="display: none">
+        <div class="logo-container">
+          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
+        </div>
+        <h2>Agency Login</h2>
+        <form id="agency-login-form" action="/login" method="POST">
+          <div class="login-form-group">
+            <input
+              required
+              placeholder="Enter your email"
+              name="loginemail"
+              autocomplete="email"
+              value=""
+              type="email"
+              id="agency-email"
+            />
+          </div>
+          <div class="login-form-group">
+            <input
+              required
+              placeholder="Enter your password"
+              name="loginpassword"
+              autocomplete="current-password"
+              value=""
+              type="password"
+              id="agency-password"
+            />
+          </div>
+          <input type="hidden" name="userType" value="agency" />
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <p class="login-form-footer">
+          <a href="#" id="agency-forgot-password">Forgot password?</a>
+          <span class="separator">|</span>
+          <a href="#" id="agency-register">Create account</a>
+        </p>
+        <a href="#" class="back-link" id="back-to-role">← Back</a>
+      </div>
 
-            <form action="/register" method="POST">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password">
-                <label for="role">Role</label>
-                <select id="role" name="role">
-                    <option>Student</option>
-                    <option>Placement Provider</option>
+      <!-- Registration form - covers both user types -->
+      <div class="login-step" id="registration-step" style="display: none">
+        <div class="logo-container">
+          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
+        </div>
+        <h2>Register</h2>
+        <form id="registration-form" action="/register" method="POST">
+          <div class="login-form-group">
+            <input
+              required
+              placeholder="Enter your email"
+              name="registeremail"
+              autocomplete="email"
+              value=""
+              type="email"
+              id="register-email"
+            />
+          </div>
+          <div class="login-form-group">
+            <input
+              required
+              placeholder="Enter your password"
+              name="registerpassword"
+              autocomplete="current-password"
+              value=""
+              type="password"
+              id="register-password"
+            />
+          </div>
 
-                </select>
-                <button type="submit">Register</button>
-                </form>
-</body>
+          <div class="login-form-group">
+            <select placeholder="Select role" id="role" name="registerrole">
+              <option value="" disabled selected>Role...</option>
+              <option value="student">Student</option>
+              <option value="agency">Agency</option>
+            </select>
+          </div>
+          <button type="submit" class="site-btn submit-btn">Register</button>
+          <a href="#" class="back-link" id="register-back-to-role">← Back</a>
+        </form>
+      </div>
+      <div
+        class="typewriter"
+        id="login-status-messages"
+        style="font-style: italic; font-size: 0.75em; text-align: center; margin: auto"
+      >
+        <p style="padding: 20px; margin: auto; color: var(--text)"><%= success %> <%= failure %></p>
+      </div>
+    </div>
+    <!-- / login-container -->
+  </body>
 </html>

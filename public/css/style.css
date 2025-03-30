@@ -1,15 +1,15 @@
-/*** All ***/
-:root {
-  --Background: #2d2d30;
-  --components: #1e1e1e;
-  --text: #d3d3d3;
-  --hover: rgba(255, 255, 255, 0.1);
+/*** Mobile-first - easier to scale up and add extra stuff as needed ***/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "League Spartan", sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--Background);
+  background-color: var(--background);
   font-family: "League Spartan", sans-serif;
   font-size: 20px;
   color: var(--text);
@@ -18,8 +18,6 @@ body {
 p {
   margin: 0;
 }
-
-/*** All ***/
 
 /*** High-level layout ***/
 .header-container {
@@ -31,64 +29,30 @@ p {
   position: relative;
 }
 
-/*** Site logo ***/
+.site-btn {
+  /*** All buttons are like this ***/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  height: 100%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.site-btn:hover {
+  transform:scale(1.1);
+  border-bottom:5px solid var(--hover);
+}
 
 #header-logo {
+  /*** Site logo ***/
   width: 40vw;
 }
 
-@media only screen and (min-width: 480px) {
-  #header-logo {
-    width: 20vw;
-  }
-}
-
-/*** Nav bar ***/
-
-.navbar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--components);
-  align-items: stretch;
-  padding: 12px;
-}
-
-.dropdown-btn {
-  background: none;
-  padding: 5px 10px;
-  border: none;
-  font-size: 20px;
-  margin:10px;
-}
-
-.dropdown-btn:hover {
-  background-color: var(--hover);
-}
-
-.searchBar {
-  float:right;
-  background-color: var(--text);
-  margin-left: 0;
-  font-size: 1.25em;
-  border-radius: 20px;
-  width:30vw;
-}
-
-.searchBar::placeholder {
-  text-align: left;
-}
-
-.searchBar:focus {
-  transition: flex-grow 0.5s ease-in-out;
-  flex-grow: 2;
-}
-
-.searchBar:not(:focus) {
-  transition: flex-grow 0.5s ease-in-out;
-  flex-grow: 1;
-}
-
+/*** Stuff for the sidebar ***/
 .sidebar-icon {
   margin-right: 15px;
 }
@@ -119,36 +83,185 @@ p {
   background-color: var(--hover);
 }
 
-.dropdownContainer a::before,
 .dropdownContainer a::after {
   content: "";
   position: absolute;
   background-color: var(--text);
   transition: transform 0.1s ease;
   transform-origin: center;
-}
-
-.dropdownContainer a::before {
-  bottom: -2px;
-  left: -5px;
-  width: 5px;
-  height: 100%;
-  transform: scale(1, 0);
-}
-
-.dropdownContainer a::after {
   right: -5px;
-  width: 5px;
+  width: 0.5vw;
   height: 100%;
   transform: scale(1, 0);
-}
-
-.dropdownContainer a:hover::before {
-  transform: scale(1, 1);
 }
 
 .dropdownContainer a:hover::after {
   transform: scale(1, 1);
 }
 
-/*** Nav bar ***/
+/*** Placement listings ***/
+#opportunity-list {
+  /* Should all go in a column with an outline and spacing */
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  gap: 12px;
+  padding: 0 24px;
+  margin: auto;
+}
+
+#opportunity-list .homepage-opportunity-listing:first-child {
+  margin-top: 24px;
+}
+
+.homepage-opportunity-listing {
+  /*** Listings have a very standardized format so grid is a bit easier than flex ***/
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-areas:
+    "icon agency like"
+    "title title title"
+    "content content content";
+  align-items: center;
+  border-radius: 24px;
+  border: 1px solid var(--hover);
+  gap: 12px;
+  padding: 16px;
+  background: var(--components);
+}
+
+.opportunity-logo {
+  /* Company logo for each placement/opportunity */
+  grid-area: icon;
+  width: 64px;
+  height: 64px;
+  justify-self: center;
+  border-radius: 5px;
+}
+
+.opportunity-agency {
+  justify-self: start;
+  grid-area: agency;
+}
+
+.opportunity-title {
+  grid-area: title;
+  font-weight: bold;
+  font-size: 1.25em;
+  margin-top:12px;
+}
+
+.opportunity-contents {
+  grid-area:content;
+  display: flex;
+  align-items: center; 
+  gap: 8px;
+  margin-top:8px;
+}
+
+.opportunity-contents svg {
+  /* The briefcase/map marker icons positioning */
+  width: 24px; 
+  height: 24px;
+  flex-shrink: 0; 
+  position: relative;
+  top: -2px; 
+}
+
+.opportunity-contents span {
+  /* Slightly downsized font for the agency/location */
+  font-size:0.75em;
+  line-height: normal;
+  margin-right:4px;
+}
+
+.opportunity-like {
+  /* Like button - go to top-right */
+  grid-area: like;
+  margin-bottom: auto;
+  margin-left: auto;
+}
+
+/*** Fun animations etc for UX ***/
+.typewriter p {
+  /*** Typewriter effect to add some movement ***/
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.15em;
+  animation: typing 0.75s steps(40, end) forwards, pulse-red 0.6s ease-in-out 0.7s;
+}
+
+.typewriter p::after {
+  /*** Cursor will eventually vanish ***/
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 0.15em;
+  background-color: var(--background);
+  animation: blink-cursor 0.5s step-end infinite, disappear-cursor 0s 0.75s forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-cursor {
+  from,
+  to {
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--background);
+  }
+}
+
+@keyframes disappear-cursor {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-red {
+  /*** Make messages flash red to draw attention ***/
+  0% {
+    color: inherit;
+  }
+  50% {
+    color: #ff0000;
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+/*** Media queries ***/
+@media (min-width: 768px) {
+  #opportunity-list {
+    /*** Make the opportunity list wider on tablets (everything else basically stays the same ***/
+    width: 100%;
+    max-width: 640px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+
+  #header-logo {
+    /*** Logo should be a bit smaller on larger screens ***/
+    width: 20vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  #opportunity-list {
+    /*** same here ***/
+    max-width: 960px;
+  }
+}
