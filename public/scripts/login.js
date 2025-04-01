@@ -1,27 +1,73 @@
-  /**
-   * @file login.js
-   * @author saul and the goodmans
-   * @brief Handles everything for menu navigation in the login screens. Bit briefer than CSS animations.
-   * @TODO nothing, shouldn't need any more steps
-   */
+/**
+ * @file login.js
+ * @author saul and the goodmans
+ * @brief Handles everything for menu navigation in the login screens. Bit briefer than CSS animations.
+ * @TODO nothing, shouldn't need any more steps
+ */
 
 function switchStep(fromId, toId, callback) {
   /**
-   * @brief Quick fade between parts of login flow, with a callback (e.g. to do extra stuff after load)
+   * @brief Does the fade transition but with a bit of sliding. More UX stuff.
+   * @TLDR web sucks
    */
-  $(`#${fromId}`).fadeOut(250, () => {
-    $(`#${toId}`).fadeIn(250, () => {
-      if (typeof callback === "function") {
-        callback();
-      }
-    });
-  });
+
+  const $from = $("#" + fromId);
+  const $to = $("#" + toId);
+
+  /* Start slightly fading out the current form before moving it */
+  $from.animate(
+    {
+      opacity: 0.7,
+    },
+    70,
+    /* Start the full fade-to-zero */
+    function () {
+      $from.animate(
+        {
+          opacity: 0,
+          left: "-30px",
+        },
+        180,
+        /* Start the leftwards slide */
+        function () {
+          $from.css("display", "none");
+          $to.css({
+            opacity: 0,
+            left: "30px",
+            position: "relative",
+            display: "flex",
+          });
+          /* Horizontal offset of the incoming pane, animate its opacity & left slide */
+          $to.animate(
+            {
+              opacity: 0.3,
+            },
+            50,
+            function () {
+              $to.animate(
+                {
+                  opacity: 1,
+                  left: "0px",
+                },
+                200,
+                function () {
+                  if (typeof callback === "function") {
+                    callback();
+                  }
+                }
+              );
+            }
+          );
+        }
+      );
+    }
+  );
 }
 
 $(document).ready(function () {
   /**
    * @brief attach event listeners to switch login steps
-   * 
+   *
    */
 
   /* Entry screen to role select */

@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <title>PlacePal Home</title>
-    <%- include('../partials/head') %>
+    <%- include(includePartial('partials/head.ejs')) %>
   </head>
   <body>
-    <%- include ('../partials/navbar') %>
+    <%- include(includePartial('partials/navbar.ejs')) %>
 
     <div class="main-container">
-      <%- include ('../partials/sidebar') %>
+      <%- include(includePartial('partials/sidebar.ejs')) %>
       <ul id="opportunity-list">
         <li class="homepage-opportunity-listing">
           <img

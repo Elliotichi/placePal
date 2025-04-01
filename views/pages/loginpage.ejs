@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <%- include('../partials/head') %>
-    <title>PlacePal Login</title>
+    <title>PlacePal</title>
     <link rel="stylesheet" href="../CSS/login.css" />
     <script src="scripts/login.js"></script>
   </head>
@@ -11,11 +11,11 @@
   <body>
     <!-- overall login container (will enclose everything)-->
     <div class="login-container">
+      <div class="logo-container">
+        <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
+      </div>
       <!-- Login is step based, will go through role select etc -->
       <div class="login-step" id="entry-step">
-        <div class="logo-container">
-          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
-        </div>
 
         <h1>Welcome</h1>
         <button class="start-btn site-btn" id="start-login">Login / Register</button>
@@ -23,9 +23,7 @@
       <!-- /entry-step -->
       <!-- Role selection - pick student/agency-->
       <div class="login-step" id="role-step" style="display: none">
-        <div class="logo-container">
-          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
-        </div>
+      
         <h2>I am a...</h2>
         <button class="role-btn site-btn" id="select-student">Student</button>
         <button class="role-btn site-btn" id="select-agency">Agency</button>
@@ -34,10 +32,7 @@
 
       <!-- Student login. Basically identical to agency login, it's more of a UX "make them feel special" idea -->
       <div class="login-step" id="student-form-step" style="display: none">
-        <div class="logo-container">
-          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
-        </div>
-        <h2>Student Login</h2>
+         <h2>Student Login</h2>
         <form id="student-login-form" action="/login" method="POST">
           <div class="login-form-group">
             <input
@@ -74,10 +69,7 @@
 
       <!-- Agency login -->
       <div class="login-step" id="agency-form-step" style="display: none">
-        <div class="logo-container">
-          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
-        </div>
-        <h2>Agency Login</h2>
+         <h2>Agency Login</h2>
         <form id="agency-login-form" action="/login" method="POST">
           <div class="login-form-group">
             <input
@@ -102,22 +94,19 @@
             />
           </div>
           <input type="hidden" name="userType" value="agency" />
-          <button type="submit" class="submit-btn">Login</button>
+          <button type="submit" class="site-btn submit-btn">Login</button>
         </form>
         <p class="login-form-footer">
           <a href="#" id="agency-forgot-password">Forgot password?</a>
           <span class="separator">|</span>
           <a href="#" id="agency-register">Create account</a>
         </p>
-        <a href="#" class="back-link" id="back-to-role">← Back</a>
+        <a href="#" class="back-link" id="agency-back-to-role">← Back</a>
       </div>
 
       <!-- Registration form - covers both user types -->
       <div class="login-step" id="registration-step" style="display: none">
-        <div class="logo-container">
-          <img id="login-logo" src="media/logo.png" alt="The PlacePal logo." />
-        </div>
-        <h2>Register</h2>
+         <h2>Register</h2>
         <form id="registration-form" action="/register" method="POST">
           <div class="login-form-group">
             <input
@@ -143,7 +132,7 @@
           </div>
 
           <div class="login-form-group">
-            <select placeholder="Select role" id="role" name="registerrole">
+            <select required placeholder="Select role" id="role" name="registerrole">
               <option value="" disabled selected>Role...</option>
               <option value="student">Student</option>
               <option value="agency">Agency</option>

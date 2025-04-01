@@ -1,0 +1,82 @@
+.placement-listing-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  max-width: 90%;
+  margin: 16px auto;
+  padding: 1rem 1rem;
+  border-radius: 8px;
+  background-color: var(--background);
+  border: 1px solid var(--hover);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#placement-title {
+  margin: auto;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  font-size: 1.25em;
+}
+#placement-logo {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius:4px;
+}
+
+.placement-icon-grid {
+  display: grid;
+  max-width: 90%;
+  margin:auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  grid-template-areas:
+    "type . location"
+    "start arrow end";
+  align-items: center;
+  padding: 4px;
+}
+
+#ptype {
+  grid-area: type;
+  justify-self: center;
+}
+#ploc {
+  grid-area: location;
+  justify-self: center;
+}
+#pstart {
+  grid-area: start;
+  justify-self: center;
+}
+#parrow {
+  grid-area: arrow;
+  justify-self: center;
+}
+#pend {
+  grid-area: end;
+  justify-self: center;
+}
+
+.placement-listing-icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--text);
+}
+
+.placement-information {
+  font-size: 0.9em;
+}
+
+li {
+  margin-left: 16px;
+  font-size: 0.85em;
+}
+
+li + li {
+  margin-top: 12px;
+}

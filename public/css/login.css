@@ -23,6 +23,7 @@
 .login-step {
   /*** Overall layout for each "step" ***/
   align-items: center;
+  position:relative;
   display: flex;
   gap: 20px;
   flex-direction: column;

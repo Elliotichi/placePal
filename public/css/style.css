@@ -118,6 +118,7 @@ p {
   /*** Listings have a very standardized format so grid is a bit easier than flex ***/
   display: grid;
   grid-template-columns: min-content 1fr;
+  cursor:pointer;
   grid-template-areas:
     "icon agency like"
     "title title title"
@@ -128,6 +129,12 @@ p {
   gap: 12px;
   padding: 16px;
   background: var(--components);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.homepage-opportunity-listing:hover {
+  /* Listings swell slightly when u mouseover */
+  transform:scale(1.005);
 }
 
 .opportunity-logo {

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PlacePal</title>
+    <%- include ('../partials/head') %>
+    <link rel="stylesheet" href="/css/placement.css" />
+  </head>
+
+  <body>
+    <%- include ('../partials/navbar') %>
+    <div class="placement-listing-container">
+        <%- include(includePartial('partials/sidebar.ejs')) %>
+      <!-- Overall placement listing container -->
+      <h2 id="placement-title"><img id="placement-logo" src="<%= placement.logo %>"><%=placement.company%> - <%= placement.title %> </h1>
+                            
+    <div class="placement-icon-grid">
+
+        <p id="ptype">
+            <svg class="placement-listing-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M184 48l144 0c4.4 0 8 3.6 8 8l0 40L176 96l0-40c0-4.4 3.6-8 8-8zm-56 8l0 40L64 96C28.7 96 0 124.7 0 160l0 96 192 0 128 0 192 0 0-96c0-35.3-28.7-64-64-64l-64 0 0-40c0-30.9-25.1-56-56-56L184 0c-30.9 0-56 25.1-56 56zM512 288l-192 0 0 32c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-32L0 288 0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-128z"/></svg>
+            <%= placement.job_type %>
+            </p>
+        <p id="ploc">
+            <svg class="placement-listing-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384  512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+            <%= placement.location %>
+        </p>
+        <p id="pstart">
+            <svg class="placement-listing-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z"/></svg>
+            <%= placement.start_date %>
+        </p>
+        <p id="parrow">
+            <svg class="placement-listing-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+        </p>
+        <p id="pend">
+            <svg class="placement-listing-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></svg>
+            <%= placement.end_date %>
+        </p>
+    </div>
+
+    <p class="placement-information">
+        <%= placement.description %>
+
+        <h4>Responsibilities</h4>
+        <ul class="placement-bullet-list" id="responsibilities.list">
+            <% placement.responsibilities.forEach(rs => { %>
+                <li><%= rs %> </li>
+           <% }); %>
+        </ul>
+
+        <h4>Requirements</h4>
+        <ul class="placement-bullet-list" id="requirements-list">
+            <% placement.requirements.forEach(rq => { %>
+                <li><%= rq %></li>
+              <% }); %>
+        </ul>
+    </p>
+      <div id="placement-interact-buttons">
+        <!-- external link -->
+        <!-- like -->
+        <!-- more -->
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,9 +1,9 @@
-  /**
-   * @file search.js
-   * @author saul and the goodmans
-   * @brief All javascript for the search: keypress detection, AJAX request, results html
-   * @TODO real-time location/title autocomplete via mongodb atlas search index (seems doable, will investigate - saul)
-   */
+/**
+ * @file search.js
+ * @author saul and the goodmans
+ * @brief All javascript for the search: keypress detection, AJAX request, results html
+ * @TODO real-time location/title autocomplete via mongodb atlas search index (seems doable, will investigate - saul)
+ */
 
 $(document).ready(function () {
   /* Let people submit via enter press*/
@@ -20,6 +20,13 @@ $(document).ready(function () {
   });
 
   $(".search-btn").on("click", getSearchResults);
+
+  $("body").on("click", ".homepage-opportunity-listing", function (e) {
+    /* When user clicks a listing, take them through a redirect to the full page*/
+    const opp_id = $(this).attr("oppid");
+    const slug = $(this).attr("id");
+    window.location.href = `/opportunities/${slug}?temp_opp_id=${opp_id}`;
+  });
 });
 
 function getSearchResults() {
@@ -54,8 +61,17 @@ function getSearchResults() {
 
       /* Add a listing for each result */
       response.forEach((opportunity) => {
+        /* hyphenate title into a slug  */
+        let opp_slug = opportunity.title
+          .toLowerCase()
+          .replace()
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .trim();
         $("#opportunity-list").append(`
-                        <li class="homepage-opportunity-listing">
+                        <li class="homepage-opportunity-listing" oppid="${opportunity._id}" id="${
+          opportunity._id.substring(0, 6) + "-" + opp_slug
+        }">
                             <img class="opportunity-logo" src="${opportunity.logo}">
                             <p class="opportunity-agency">${opportunity.company}</p>
                             <p class="opportunity-title">${opportunity.title}</p>
