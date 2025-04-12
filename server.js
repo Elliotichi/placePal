@@ -218,9 +218,8 @@ const storage = multer.diskStorage({
     async (req, res) => {
       /* DB conn fail */
       if (!db) {
-        return res.redirect(303, "/");
         req.session.loggedIn = false;
-        return;
+        return res.redirect(303, "/");
       }
 
       /* Validation middleware fail */
@@ -320,6 +319,18 @@ const storage = multer.diskStorage({
       return res.redirect(303, "/");
     }
   });
+
+  app.get("/getSponsored", async (req, res) => {
+    if (!db) {
+      req.session.loggedIn = false;
+      return res.redirect(303, "/");
+    }
+
+    const data = await db.collection('placements').find({featured:true}).toArray()
+    console.log("im being called")
+    console.table(data)
+    res.json(data)
+  })
 
   app.post("/analyze", upload.single("document"), async (req, res) => {
     /**
