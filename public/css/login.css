@@ -23,7 +23,7 @@
 .login-step {
   /*** Overall layout for each "step" ***/
   align-items: center;
-  position:relative;
+  position: relative;
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -59,6 +59,11 @@
   color: var(--text);
 }
 
+.login-form-group input:focus {
+  outline: none;
+  border-color: var(--placepalblue);
+}
+
 /*** override browser autofill styles ¯\_(ツ)_/¯ ***/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -89,6 +94,24 @@ input:autofill:active {
   color: var(--text);
   font-size: 1.25em;
   transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#role {
+  height: 60px;
+  padding: 0 16px 0 16px;
+  border: 1px solid var(--hover);
+  font-size: 16px;
+  outline: none;
+  appearance: none;
+  background-color: var(--background);
+  color: var(--text);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237f8c8d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  display: flex;
+  align-items: center;
+  line-height: normal;
 }
 
 .start-btn:hover,

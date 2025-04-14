@@ -1,0 +1,88 @@
+.cv-analyzer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  max-width: 90%;
+  margin: 16px auto;
+  padding: 1rem 1rem;
+  border-radius: 8px;
+  background-color: var(--background);
+  border: 1px solid var(--hover);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#upload-cv-btn {
+  width: 15%;
+  margin-left: auto;
+  background-color: var(--placepalblue);
+  padding: 20px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#upload-cv-btn:hover {
+  /*** Swell buttons a bit on hover, looks good ***/
+  /*** Override the fancier stuff for navbar buttons from styles.css/.site-btn ***/
+  background-color: var(--placepalblue);
+  transform: scale(1.025) !important;
+  border-bottom: none !important;
+}
+
+/*** Stuff for CV analyzer ***/
+
+#recommendation-list {
+  list-style-type: none;
+  gap:8px;
+}
+
+.cv-recommendation {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  cursor:pointer;
+  border-radius: 8px;
+  background-color: var(--background);
+  border: 1px solid var(--hover);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin:16px;
+  transition: transform 0.3s ease;
+  padding:24px;
+}
+
+.cv-recommendation-tooltip {
+  /*** positioning ***/
+  display:none;
+  position:fixed !important;
+  z-index:1000 !important;;
+  
+  /*** appearance ***/
+  max-width:80%;
+  margin-top:4px;
+  border-radius: 8px;
+  background-color: var(--background);
+  border: 1px solid var(--hover);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  pointer-events:none;
+  opacity:0;
+  transform:none !important;
+
+  /*** contents ***/
+  font-style:italic;
+  padding: 8px !important;
+  font-size:0.75em;
+}
+
+
+.cv-recommendation:hover {
+  transform:scale(1.005);
+}
+
+.cv-recommendation p {
+ width: 30%;
+ align-content:center;
+ border:1px solid var(--hover);
+}

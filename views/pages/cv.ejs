@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>PlacePal</title>
+    <%- include(includePartial('partials/head.ejs')) %>
+    <link rel="stylesheet" href="../CSS/cv.css" />
+    <script src="/scripts/cv.js"></script>
+</head>
+
+
+  <body>
+    <%- include(includePartial('partials/navbar.ejs')) %>
+
+    <div class="cv-analyzer-container">
+
+        <form id="cv-form" action="/analyze" method="POST" enctype="multipart/form-data">
+            <input type="file" id="cv-upload" name="document" accept=".docx" style="display: none;">
+            <button type="button" id="upload-cv-btn">Upload CV</button>
+        </form>
+
+        <ul id="recommendation-list">
+          
+  
+        </ul>
+    </div>
+
+  </body>
+</html>

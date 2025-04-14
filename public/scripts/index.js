@@ -1,40 +1,41 @@
 let sponseredOpps;
 
 $(document).ready(function () {
-    getSponsored();
-})
+  getSponsored();
+});
 
 function getSponsored() {
-    $.ajax({
-        url: "/getSponsored",
-        method: "GET",
-        success: function (response) {
-            /* Clear the list for the new result(s) */
-            $("#opportunity-list").empty();
+  $.ajax({
+    url: "/getSponsored",
+    method: "GET",
+    success: function (response) {
+      /* Clear the list for the new result(s) */
+      $("#opportunity-list").empty();
 
-            if (response.isempty)
-                if (response.length === 0) {
-                    /* Fallback: nothing matches the search q */
-                    $("#opportunity-list").append(`<p>No matching jobs found.</p>`);
-                    return;
-                }
+      if (response.isempty)
+        if (response.length === 0) {
+          /* Fallback: nothing matches the search q */
+          $("#opportunity-list").append(`<p>No matching jobs found.</p>`);
+          return;
+        }
 
-            /* Add a listing for each result */
-            response.forEach((opportunity) => {
-                /* hyphenate title into a slug  */
-                let opp_slug = opportunity.title
-                    .toLowerCase()
-                    .replace()
-                    .replace(/[^\w\s-]/g, "")
-                    .replace(/\s+/g, "-")
-                    .trim();
-                $("#opportunity-list").append(`
-                                <h1>Sponsored</h1>
-                                <li class="homepage-opportunity-listing" oppid="${opportunity._id}" id="${opportunity._id.substring(0, 6) + "-" + opp_slug
-                    }">
+      /* Add a listing for each result */
+      response.forEach((opportunity) => {
+        /* hyphenate title into a slug  */
+        let opp_slug = opportunity.title
+          .toLowerCase()
+          .replace()
+          .replace(/[^\w\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .trim();
+        $("#opportunity-list").append(`
+                                <li id="sponsored" class="homepage-opportunity-listing" oppid="${
+                                  opportunity._id
+                                }" id="${opportunity._id.substring(0, 6) + "-" + opp_slug}">
                                     <img class="opportunity-logo" src="${opportunity.logo}">
-                                    <p class="opportunity-agency">${opportunity.company}</p>
-                                    <p class="opportunity-title">${opportunity.title}</p>
+                                    <p class="opportunity-agency">${opportunity.company} - ${
+          opportunity.title
+        }</p>
                                     <p class="opportunity-contents">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="var(--text)" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M184 48l144 0c4.4 0 8 3.6 8 8l0 40L176 96l0-40c0-4.4 3.6-8 8-8zm-56 8l0 40L64 96C28.7 96 0 124.7 0 160l0 96 192 0 128 0 192 0 0-96c0-35.3-28.7-64-64-64l-64 0 0-40c0-30.9-25.1-56-56-56L184 0c-30.9 0-56 25.1-56 56zM512 288l-192 0 0 32c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-32L0 288 0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-128z"/></svg>
                                     <span>${opportunity.company}</span>
@@ -46,11 +47,11 @@ function getSponsored() {
                                     </button>
                                 </li>
                         `);
-            });
-        },
-        error: function (xhr, status, error) {
-            alert("There was an issue with your search. Please try again.");
-        },
-    });
+      });
+    },
+    error: function (xhr, status, error) {
+      alert("There was an issue with your search. Please try again.");
+    },
+  });
 }
 

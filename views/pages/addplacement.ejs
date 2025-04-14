@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PlacePal</title>
+    <%- include(includePartial('partials/head.ejs')) %>
+    <script src="/scripts/addplacement.js"></script>
+    <link rel="stylesheet" href="/css/addplacement.css" />
+  </head>
+
+  <body>
+    <%- include(includePartial('partials/navbar.ejs')) %>
+    <div class="add-placement-form-container">
+      <form id="placement-add-form" action="/addPlacement" method="POST">
+        <div class="form-field">
+          <input class="input-field" id="placement-title" name="placementTitle" type="text" />
+          <label class="input-label" for="placement-title">Title</label>
+        </div>
+        <div class="form-field">
+          <input class="input-field" id="placement-company" name="placementCompany" type="text" />
+          <label class="input-label" for="placement-company">Company</label>
+        </div>
+
+        <div class="form-field">
+          <input class="input-field" id="placement-location" name="placementLocation" type="text" />
+          <label class="input-label" for="placement-location">Location</label>
+        </div>
+
+        <div class="form-field">
+          <input
+            class="input-field"
+            id="placement-description"
+            name="placementDescription"
+            type="text"
+          />
+          <label class="input-label" for="placement-description">Description</label>
+        </div>
+
+        <div class="form-field">
+          <input
+            class="input-field"
+            id="placement-responsibilities"
+            name="placementResponsibilities"
+            type="text"
+          />
+          <label class="input-label" for="placement-responsibilities">Responsibilities</label>
+        </div>
+
+        <div class="form-field">
+          <input
+            class="input-field"
+            id="placement-requirements"
+            name="placementRequirements"
+            type="text"
+          />
+          <label class="input-label" for="placement-requirements">Requirements</label>
+        </div>
+
+        <div class="form-field">
+          <input
+            class="input-field"
+            id="placement-start-date"
+            name="placementStartDate"
+            type="date"
+          />
+          <label class="input-label" for="placement-start-date">Start</label>
+        </div>
+
+        <div class="form-field">
+          <input class="input-field" id="placement-end-date" name="placementEndDate" type="date" />
+          <label class="input-label" for="placement-end-date">End</label>
+        </div>
+
+        <div class="form-field">
+          <input class="input-field" id="placement-salary" name="placementSalary" type="text" />
+          <label class="input-label" for="placement-salary">Annual Salary</label>
+        </div>
+
+        <div class="form-field">
+          <select id="placement-type">
+            <option value="year-long">Year Long</option>
+            <option value="short-project">Short Project</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <input class="input-field" id="placement-tags" name="placementTags" type="text" />
+          <label class="input-label" for="placement-salary">Tags</label>
+        </div>
+
+        <button type="button" id="add-btn" class="btn">Add</button>
+      </form>
+
+      <div id="redirect-overlay">
+        <p><em>Connecting to Stripe for secure payment...</em></p>
+      </div>
+    </div>
+  </body>
+</html>

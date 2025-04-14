@@ -6,6 +6,16 @@
  */
 
 $(document).ready(function () {
+
+$("#placement-add-btn").click(function () {
+  window.location.href = "/addPlacement";
+});
+
+$("#cv-analyzer-btn").click(function () {
+  window.location.href = "/cv";
+});
+
+
   $("#sidebar-btn").click(function () {
     $(".dropdownContainer").toggleClass("active");
 
