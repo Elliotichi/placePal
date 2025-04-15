@@ -14,7 +14,6 @@
 
 #upload-cv-btn {
   width: 15%;
-  margin-left: auto;
   background-color: var(--placepalblue);
   padding: 20px;
   color: var(--text);
@@ -85,4 +84,17 @@
  width: 30%;
  align-content:center;
  border:1px solid var(--hover);
+}
+
+.top-row {
+  display:flex;
+  flex-direction:row;
+  gap: 12px;
+}
+
+.top-row p {
+  margin-right:auto;
+  font-style:italic;
+  max-width:33%;
+  font-size:0.75em;
 }

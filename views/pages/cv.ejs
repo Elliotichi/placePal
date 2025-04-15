@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
-<head>
+  <head>
     <title>PlacePal</title>
     <%- include(includePartial('partials/head.ejs')) %>
     <link rel="stylesheet" href="../CSS/cv.css" />
     <script src="/scripts/cv.js"></script>
-</head>
-
+  </head>
 
   <body>
     <%- include(includePartial('partials/navbar.ejs')) %>
 
     <div class="cv-analyzer-container">
+      <form id="cv-form" action="/analyze" method="POST" enctype="multipart/form-data">
+        <div class="top-row">
+          <input type="file" id="cv-upload" name="document" accept=".docx" style="display: none" />
+          <button type="button" id="upload-cv-btn">Upload CV</button>
+          <p id="cv-disclaimer">    
+            *Your CV will be securely and temporarily stored on our servers solely for processing. 
+            PlacePal handles your personal data confidentially and commits to deleting your CV promptly after the automated analysis concludes. 
+            By uploading, you acknowledge this process.</p>
+        </div>
+      </form>
 
-        <form id="cv-form" action="/analyze" method="POST" enctype="multipart/form-data">
-            <input type="file" id="cv-upload" name="document" accept=".docx" style="display: none;">
-            <button type="button" id="upload-cv-btn">Upload CV</button>
-        </form>
-
-        <ul id="recommendation-list">
-          
-  
-        </ul>
+      <ul id="recommendation-list"></ul>
     </div>
-
   </body>
 </html>
